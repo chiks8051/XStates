@@ -11,10 +11,14 @@ const Xstate = () => {
   const [selectedCity, setSelectedCity] = useState("");
 
   const fetchCountry = async () => {
-    const response = await axios.get(
-      "https://crio-location-selector.onrender.com/countries"
-    );
-    setCountry(response.data);
+    try {
+      const response = await axios.get(
+        "https://crio-location-selector.onrender.com/countries"
+      );
+      setCountry(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -102,7 +106,9 @@ const Xstate = () => {
         <div style={{ display: "inline" }}>
           <p style={{ fontSize: "40px" }}>
             You selected <b>{selectedCity}</b>,{" "}
-            <span style={{ color: "gray" }}>{selectedState}, {selectedCountry}</span>
+            <span style={{ color: "gray" }}>
+              {selectedState}, {selectedCountry}
+            </span>
           </p>
         </div>
       )}
