@@ -27,18 +27,26 @@ const Xstate = () => {
 
   const handleSelectedCountry = async (event) => {
     setSelectedCountry(event.target.value);
-    const response = await axios.get(
-      `https://crio-location-selector.onrender.com/country=${event.target.value}/states`
-    );
-    setState(response.data);
+    try {
+      const response = await axios.get(
+        `https://crio-location-selector.onrender.com/country=${event.target.value}/states`
+      );
+      setState(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSelectedState = async (event) => {
     setSelectedState(event.target.value);
-    const city = await axios.get(
-      ` https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${event.target.value}/cities`
-    );
-    setCity(city.data);
+    try {
+      const city = await axios.get(
+        ` https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${event.target.value}/cities`
+      );
+      setCity(city.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSelectedCity = (event) => {
